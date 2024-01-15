@@ -1,0 +1,47 @@
+body {
+  font-family: Arial, sans-serif;
+}
+
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  max-width: 900px;
+  background-color: white;
+  gap: 50px;
+  padding: 0 40px;
+}
+
+.hangman-img {
+  max-width: 280px;
+}
+
+.game-title {
+  margin-top: 20px;
+  text-align: center;
+}
+
+/* .game-container{
+margin-top: 10px;
+} */
+.word-container {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  list-style: none;
+  gap: 10px;
+}
+
+.word-container .letter {
+  text-transform: uppercase;
+  font-weight: 200;
+  font-size: 2rem;
+  width: 30px;
+  border-bottom: 4px solid black;
+}
+
+.letter.guessed {
+  border-bottom: transparent;
+}
