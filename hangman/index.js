@@ -41,7 +41,7 @@ document.addEventListener("DOMContentLoaded", () => {
   incorrectGuesses.textContent = "Incorrect guesses: ";
   incorrectGuesses.appendChild(incorrectGuessesCounter);
 
-  const virtualKeyboard = document.createElement("section");
+  const virtualKeyboard = document.createElement("div");
   virtualKeyboard.classList.add("virtual-keyboard");
 
   //buttons
