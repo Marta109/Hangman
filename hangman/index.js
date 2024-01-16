@@ -60,15 +60,14 @@ document.addEventListener("DOMContentLoaded", () => {
   const modalContent = document.createElement("div");
   modalContent.classList.add("modal_content");
   const modalTitle = document.createElement("h3");
-  modalTitle.classList.add("modal_title");
-  modalTitle.textContent = "game over you";
+  modalTitle.classList.add("modal-title");
+  modalTitle.textContent = "Game over you";
   const showHiddenWord = document.createElement("p");
   showHiddenWord.classList.add("modal-hidden-word");
   showHiddenWord.textContent = "The hidden word was";
   const modalButton = document.createElement("button");
   modalButton.classList.add("modal-btn");
   modalButton.textContent = "Play Again";
-
 
   //  add elements --------------------------------
 
@@ -81,9 +80,9 @@ document.addEventListener("DOMContentLoaded", () => {
   gameContainer.appendChild(virtualKeyboard);
 
   gameModal.appendChild(modalContent);
-  gameModal.appendChild(modalTitle);
-  gameModal.appendChild(showHiddenWord);
-  gameModal.appendChild(modalButton);
+  modalContent.appendChild(modalTitle);
+  modalContent.appendChild(showHiddenWord);
+  modalContent.appendChild(modalButton);
 
   container.appendChild(hangmanContainer);
   container.appendChild(gameContainer);
