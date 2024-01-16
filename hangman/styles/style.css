@@ -11,6 +11,7 @@ body {
   background-color: white;
   gap: 50px;
   padding: 0 40px;
+  margin: 0 auto;
 }
 
 .hangman-img {
@@ -56,3 +57,29 @@ body {
 .incorrect-guesses-counter {
   color: red;
 }
+
+.virtual-keyboard {
+  margin-top: 45px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 5px;
+  /* width: 100px; */
+}
+
+.virtual-keyboard-button {
+  width: calc(100% / 9 - 5px);
+  background-color: #5455ac;
+  font-weight: 560;
+  font-size: 1.6em;
+  padding: 5px;
+  border: none;
+  color: white;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.virtual-keyboard-button:hover {
+  background-color: #7b7cce;
+}
+

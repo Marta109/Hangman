@@ -44,14 +44,33 @@ document.addEventListener("DOMContentLoaded", () => {
   const virtualKeyboard = document.createElement("div");
   virtualKeyboard.classList.add("virtual-keyboard");
 
-  //buttons
+  // letter buttons --------------------------------
   for (let i = 0; i < 26; i++) {
     const button = document.createElement("button");
     const letter = String.fromCharCode(65 + i).toUpperCase();
     button.textContent = letter;
     value = letter;
+    button.classList.add("virtual-keyboard-button");
     virtualKeyboard.appendChild(button);
   }
+
+  //  game modal --------------------------------
+  const gameModal = document.createElement("div");
+  gameModal.classList.add("modal_container");
+  const modalContent = document.createElement("div");
+  modalContent.classList.add("modal_content");
+  const modalTitle = document.createElement("h3");
+  modalTitle.classList.add("modal_title");
+  modalTitle.textContent = "game over you";
+  const showHiddenWord = document.createElement("p");
+  showHiddenWord.classList.add("modal-hidden-word");
+  showHiddenWord.textContent = "The hidden word was";
+  const modalButton = document.createElement("button");
+  modalButton.classList.add("modal-btn");
+  modalButton.textContent = "Play Again";
+
+
+  //  add elements --------------------------------
 
   hangmanContainer.appendChild(hangmanImage);
   hangmanContainer.appendChild(gameTitle);
@@ -61,8 +80,14 @@ document.addEventListener("DOMContentLoaded", () => {
   gameContainer.appendChild(incorrectGuesses);
   gameContainer.appendChild(virtualKeyboard);
 
+  gameModal.appendChild(modalContent);
+  gameModal.appendChild(modalTitle);
+  gameModal.appendChild(showHiddenWord);
+  gameModal.appendChild(modalButton);
+
   container.appendChild(hangmanContainer);
   container.appendChild(gameContainer);
+  container.appendChild(gameModal);
 
   document.body.appendChild(container);
 });
