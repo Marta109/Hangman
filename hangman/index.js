@@ -20,15 +20,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const wordContainer = document.createElement("ul");
   wordContainer.classList.add("word-container");
 
-  //guessed letters
-  const lettersToGuess = ["a", "b", "c", "d"];
-  lettersToGuess.forEach((letter) => {
-    const li = document.createElement("li");
-    li.classList.add("letter");
-    // li.textContent = letter;
-    wordContainer.appendChild(li);
-  });
-
   const wordHint = document.createElement("h2");
   wordHint.classList.add("word-hint");
   wordHint.textContent = "Hint: A human-powered vehicle with two wheels.";
@@ -49,9 +40,10 @@ document.addEventListener("DOMContentLoaded", () => {
     const button = document.createElement("button");
     const letter = String.fromCharCode(65 + i).toUpperCase();
     button.textContent = letter;
-    value = letter;
+    // button.value = letter;
     button.classList.add("virtual-keyboard-button");
     virtualKeyboard.appendChild(button);
+    button.addEventListener("click", (e) => checkLetter(e.target, letter));
   }
 
   //  game modal --------------------------------
@@ -89,4 +81,105 @@ document.addEventListener("DOMContentLoaded", () => {
   container.appendChild(gameModal);
 
   document.body.appendChild(container);
+
+  // add game logic --------------------------------
+  const questionsList = [
+    {
+      word: "apple",
+      hint: "A common fruit with a red or green skin.",
+    },
+    {
+      word: "cat",
+      hint: "A small, domesticated carnivorous mammal.",
+    },
+    {
+      word: "sun",
+      hint: "The star at the center of our solar system.",
+    },
+    {
+      word: "book",
+      hint: "A written or printed work consisting of pages.",
+    },
+    {
+      word: "tree",
+      hint: "A tall, perennial plant with a trunk and branches.",
+    },
+    {
+      word: "beach",
+      hint: "A sandy shore along the edge of a body of water.",
+    },
+    {
+      word: "house",
+      hint: "A building for human habitation.",
+    },
+    {
+      word: "car",
+      hint: "A wheeled motor vehicle used for transportation.",
+    },
+    {
+      word: "flower",
+      hint: "The reproductive structure found in plants.",
+    },
+    {
+      word: "water",
+      hint: "A clear, colorless, odorless, and tasteless liquid.",
+    },
+    {
+      word: "bird",
+      hint: "A warm-blooded, feathered vertebrate with wings.",
+    },
+    {
+      word: "moon",
+      hint: "The natural satellite of the Earth.",
+    },
+    {
+      word: "time",
+      hint: "The indefinite continued progress of existence.",
+    },
+    {
+      word: "song",
+      hint: "A short musical composition with words.",
+    },
+    {
+      word: "sleep",
+      hint: "A naturally recurring state of rest for the body and mind.",
+    },
+  ];
+
+  let currentWord = "";
+  let counter = 0;
+
+  const lettersToGuess = (wordArr) => {
+    console.log(wordArr);
+    wordArr = wordArr.split("");
+    wordArr.forEach((letter) => {
+      const li = document.createElement("li");
+      li.classList.add("letter");
+      // li.textContent = letter;
+      wordContainer.appendChild(li);
+    });
+  };
+
+  const getRandomWord = () => {
+    const {word, hint} =
+      questionsList[Math.floor(Math.random() * questionsList.length)];
+    lettersToGuess(word);
+    wordHint.textContent = hint;
+    currentWord = word.toUpperCase();
+    showHiddenWord.textContent = `The hidden word was - ${word}`;
+
+    console.log("answer =", word);
+    console.log(word, hint);
+  };
+
+  const checkLetter = (elem, letter) => {
+    if (currentWord.includes(letter)) {
+      console.log("ura");
+    } else {
+      counter++;
+      incorrectGuessesCounter.textContent = `${counter} / 6`;
+    }
+  };
+
+  getRandomWord();
 });
