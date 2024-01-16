@@ -147,7 +147,12 @@ document.addEventListener("DOMContentLoaded", () => {
   ];
 
   let currentWord = "";
-  let counter = 0;
+  let counterWrong = 0;
+  let counterRight = 0;
+
+  // let currentWord,
+  //   counterWrong = 0;
+  // counterRight = 0;
 
   const lettersToGuess = (wordArr) => {
     console.log(wordArr);
@@ -166,19 +171,60 @@ document.addEventListener("DOMContentLoaded", () => {
     lettersToGuess(word);
     wordHint.textContent = hint;
     currentWord = word.toUpperCase();
+    counterRight = currentWord.length;
     showHiddenWord.textContent = `The hidden word was - ${word}`;
 
     console.log("answer =", word);
-    console.log(word, hint);
+  };
+
+  const gameRestart = () => {
+    currentWord = "";
+    counterWrong = 0;
+    counterRight = 0;
+    gameModal.classList.remove("show");
+    modalContent.classList.remove("show");
+    incorrectGuessesCounter.textContent = `${counterWrong} / 6`;
+    getRandomWord();
+    hangmanImage.src = `./img/hangman-${counterWrong}.svg`;
+    wordContainer.innerHTML = currentWord
+      .split("")
+      .map((el) => `<li class='letter'></li>`)
+      .join("");
+    document
+      .querySelectorAll(".virtual-keyboard-button")
+      .forEach((btn) => (btn.disabled = false));
+  };
+
+  // gameRestart();
+
+  const gameOver = (text) => {
+    modalTitle.textContent = `Game over you ${text}`;
+    gameModal.classList.add("show");
+    modalContent.classList.add("show");
+    modalButton.addEventListener("click", gameRestart);
   };
 
   const checkLetter = (elem, letter) => {
+    elem.disabled = true;
     if (currentWord.includes(letter)) {
-      console.log("ura");
+      currentWord.split("").forEach((currentLetter, i) => {
+        if (currentLetter === letter) {
+          counterRight--;
+          wordContainer.querySelectorAll("li")[i].innerHTML =
+            currentLetter;
+          wordContainer.querySelectorAll("li")[i].classList.add("guessed");
+        }
+      });
     } else {
-      counter++;
-      incorrectGuessesCounter.textContent = `${counter} / 6`;
+      counterWrong++;
+      hangmanImage.src = `./img/hangman-${counterWrong}.svg`;
+      incorrectGuessesCounter.textContent = `${counterWrong} / 6`;
     }
+    counterWrong === 6
+      ? gameOver("lost")
+      : counterRight === 0
+      ? gameOver("won")
+      : "";
   };
 
   getRandomWord();
