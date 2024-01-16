@@ -227,5 +227,20 @@ document.addEventListener("DOMContentLoaded", () => {
       : "";
   };
 
+  document.addEventListener("keydown", (e) => {
+    const letter = e.key.toUpperCase();
+    const buttons = document.querySelectorAll(".virtual-keyboard-button");
+    const button = Array.from(buttons).find(
+      (btn) => btn.textContent === letter
+    );
+    if (/^[a-zA-Z]$/.test(letter)) {
+      checkLetter(button, letter);
+    } else {
+      console.log(
+        "You entered not a  letter or a letter other than the English alphabet"
+      );
+    }
+  });
+
   getRandomWord();
 });
