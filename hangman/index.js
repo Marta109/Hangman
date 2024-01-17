@@ -215,8 +215,8 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   const checkLetter = (elem, letter) => {
-    elem.disabled = true;
     if (currentWord.includes(letter)) {
+      elem.disabled = true;
       currentWord.split("").forEach((currentLetter, i) => {
         if (currentLetter === letter) {
           counterRight--;
@@ -226,9 +226,12 @@ document.addEventListener("DOMContentLoaded", () => {
         }
       });
     } else {
-      counterWrong++;
-      hangmanImage.src = `./img/hangman-${counterWrong}.svg`;
-      incorrectGuessesCounter.textContent = `${counterWrong} / 6`;
+      if (!elem.disabled) {
+        elem.disabled = true;
+        counterWrong++;
+        hangmanImage.src = `./img/hangman-${counterWrong}.svg`;
+        incorrectGuessesCounter.textContent = `${counterWrong} / 6`;
+      }
     }
     counterWrong === 6
       ? gameOver("lost")
