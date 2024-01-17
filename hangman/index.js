@@ -155,7 +155,6 @@ document.addEventListener("DOMContentLoaded", () => {
   // counterRight = 0;
 
   const lettersToGuess = (wordArr) => {
-    console.log(wordArr);
     wordArr = wordArr.split("");
     wordArr.forEach((letter) => {
       const li = document.createElement("li");
@@ -166,18 +165,28 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   const getRandomWord = () => {
-    const {word, hint} =
+    let {word, hint} =
       questionsList[Math.floor(Math.random() * questionsList.length)];
-    lettersToGuess(word);
-    wordHint.textContent = hint;
-    currentWord = word.toUpperCase();
-    counterRight = currentWord.length;
-    showHiddenWord.textContent = `The hidden word was - ${word}`;
-
-    console.log("answer =", word);
+    if (!currentWord && currentWord === word.toUpperCase()) {
+      let {word, hint} =
+        questionsList[Math.floor(Math.random() * questionsList.length)];
+      lettersToGuess(word);
+      wordHint.textContent = hint;
+      currentWord = word.toUpperCase();
+      counterRight = currentWord.length;
+      showHiddenWord.textContent = `The hidden word was - ${word}`;
+    } else {
+      lettersToGuess(word);
+      wordHint.textContent = hint;
+      currentWord = word.toUpperCase();
+      counterRight = currentWord.length;
+      showHiddenWord.textContent = `The hidden word was - ${word}`;
+    }
+    console.log("answer= ", currentWord);
   };
 
   const gameRestart = () => {
+    document.addEventListener("keydown", keyboardInput);
     currentWord = "";
     counterWrong = 0;
     counterRight = 0;
@@ -201,6 +210,7 @@ document.addEventListener("DOMContentLoaded", () => {
     modalTitle.textContent = `Game over you ${text}`;
     gameModal.classList.add("show");
     modalContent.classList.add("show");
+    document.removeEventListener("keydown", keyboardInput);
     modalButton.addEventListener("click", gameRestart);
   };
 
@@ -227,7 +237,7 @@ document.addEventListener("DOMContentLoaded", () => {
       : "";
   };
 
-  document.addEventListener("keydown", (e) => {
+  const keyboardInput = (e) => {
     const letter = e.key.toUpperCase();
     const buttons = document.querySelectorAll(".virtual-keyboard-button");
     const button = Array.from(buttons).find(
@@ -240,7 +250,8 @@ document.addEventListener("DOMContentLoaded", () => {
         "You entered not a  letter or a letter other than the English alphabet"
       );
     }
-  });
+  };
 
+  document.addEventListener("keydown", keyboardInput);
   getRandomWord();
 });
