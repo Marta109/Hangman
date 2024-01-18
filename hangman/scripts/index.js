@@ -1,4 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
+  const wrapper = document.createElement("div");
+  wrapper.classList.add("wrapper");
+
   const container = document.createElement("div");
   container.classList.add("container");
 
@@ -63,6 +66,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
   //  add elements --------------------------------
 
+  wrapper.appendChild(container);
+
   hangmanContainer.appendChild(hangmanImage);
   hangmanContainer.appendChild(gameTitle);
 
@@ -80,5 +85,6 @@ document.addEventListener("DOMContentLoaded", () => {
   container.appendChild(gameContainer);
   container.appendChild(gameModal);
 
-  document.body.appendChild(container);
+  document.body.appendChild(wrapper);
+  // document.body.appendChild(container);
 });
