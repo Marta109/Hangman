@@ -1,4 +1,4 @@
-## Hangman 
+## Hangman  
 Hangman is a classic word game in which you must find the correct answer by guessing letters one at a time.
 
 1.Task: https://github.com/rolling-scopes-school/tasks/tree/master/stage1/tasks/hangman    
